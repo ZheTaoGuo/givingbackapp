@@ -1,4 +1,3 @@
-import React, { useMemo, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, Text, View, Image, Button, TouchableWithoutFeedback } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -146,49 +145,10 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff', 
-    flexGrow: 1,
-  },
-  containerContent: {
-    flexGrow: 1,
-  },
-  profileHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    marginTop: 30, 
-    marginLeft: 10, 
-    marginRight: 10, 
-    paddingTop: 10, 
-    paddingBottom: 10, 
-    borderColor: 'rgba(0, 0, 0, 0.1)', 
-    borderStyle: 'solid', 
-    borderWidth: 1, 
-    borderRadius: "10px", 
-    backgroundColor: '#fff', 
-  }, 
-  profileImage: {
+    flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }, 
-  profileName: {
-    fontSize: 25, 
-    fontWeight: 'bold',
-    color: "#2fac97", 
-    marginBottom: 10
-  }, 
-  profilePoints: {
-    flexDirection: 'row', 
-    marginBottom: 10, 
-  }, 
-  profileText: {
-    fontSize: 30
-  }, 
-  profileSmall: {
-    fontSize: 15
-  }, 
-  profileSub: {
-    opacity: 0.7
   },
   calendarStyle: {
     marginLeft: 10, 

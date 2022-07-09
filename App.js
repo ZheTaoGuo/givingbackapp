@@ -2,12 +2,21 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AppRegistry, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faHandshakeAngle, faTree, faSackDollar  } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faHandshakeAngle,
+  faTree,
+  faSackDollar,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Tree from "./pages/Tree";
 import Funds from "./pages/Funds";
 import Volunteer from "./pages/Volunteer";
 import Profile from "./pages/Profile";
+import Redeem from "./pages/Redeem";
+import Activity from "./pages/Activity";
+import RedeemDetail from "./pages/RedeemDetail"
+import FundsDetail from "./pages/FundsDetail";
 
 export default function App() {
   const [navIndex, setNavIndex] = useState(0);
@@ -15,12 +24,21 @@ export default function App() {
   return (
     <NativeRouter>
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView
+          style={styles.contentWrapper}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
           <Routes>
-            <Route exact path="/" element={<Volunteer />} />
+            <Route exact path="/" element={<Tree />} />
             <Route path="/tree" element={<Tree />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/activity" element={<Activity />} />
+
+            <Route path="/redeem" element={<Redeem />} />
+            <Route path="/redeem/:slug" element={<RedeemDetail />} />
+            <Route path="/funds/:slug" element={<FundsDetail />} />
           </Routes>
         </ScrollView>
         <View style={styles.nav}>
@@ -56,11 +74,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
     flex: 1,
+    height: "100vh"
   },
-  header: {
-    fontSize: 20,
+  contentWrapper: {
+    marginBottom: 66
   },
   nav: {
     flexDirection: "row",
@@ -68,6 +86,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "rgba(170, 167, 167, 0.5)",
     padding: 7,
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "white",
   },
   navItem: {
     flex: 1,
@@ -87,7 +109,7 @@ const styles = StyleSheet.create({
   navIcon:{
     height: 20,
     width: 20,
-    marginBottom: 5
+    marginBottom: 5,
   },
   topic: {
     textAlign: "center",

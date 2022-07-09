@@ -185,7 +185,7 @@ export default function RedeemDetail() {
         {donations.point < 321 ? (
           <Pressable
             style={donated ? styles.donateBtnDisabled : styles.donateBtn}
-            onPress={() => {setModalVisible(true); setDonated(true);}}
+            onPress={() => setModalVisible(true)}
             disabled={donated}
           >
             <Text style={{ color: "white", fontSize: "1.25rem" }}>
@@ -195,6 +195,7 @@ export default function RedeemDetail() {
         ) : (
           <View
             style={styles.donateBtnDisabled}
+            onPress={() => setModalVisible(true)}
           >
             <Text style={{ color: "white", fontSize: "1.25rem" }}>
               {donations.point - 321} more points
@@ -208,14 +209,20 @@ export default function RedeemDetail() {
         animationType="fade"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>You have successfully redeemed</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                setDonated(true);
+              }}
+              disabled={donated}
             >
               <Text style={styles.textStyle}>Close</Text>
             </Pressable>

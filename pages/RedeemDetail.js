@@ -43,6 +43,7 @@ export default function RedeemDetail() {
         </TouchableOpacity>
         <Text style={styles.headerText}>Redeem Detail</Text>
       </View>
+
       <SafeAreaView>
         <Image
           style={styles.itemProfile}
@@ -77,6 +78,7 @@ export default function RedeemDetail() {
                   );
                 })}
               </View>
+
               <Text>{donations.description}</Text>
               <Text style={styles.itemPoint}>
                 321 / {donations.point} points
@@ -90,6 +92,8 @@ export default function RedeemDetail() {
           </View>
         </View>
       </SafeAreaView>
+
+
       <View
         style={{
           display: "flex",
@@ -124,6 +128,8 @@ export default function RedeemDetail() {
           </View>
         )}
       </View>
+
+      
       <Modal
         animationType="fade"
         transparent={true}

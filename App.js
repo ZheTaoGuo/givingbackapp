@@ -14,6 +14,7 @@ import Funds from "./pages/Funds";
 import Volunteer from "./pages/Volunteer";
 import Profile from "./pages/Profile";
 import Redeem from "./pages/Redeem";
+import RedeemDetail from "./pages/RedeemDetail"
 
 export default function App() {
   return (
@@ -25,12 +26,13 @@ export default function App() {
           showsHorizontalScrollIndicator={false}
         >
           <Routes>
-            <Route exact path="/" element={<Volunteer />} />
+            <Route exact path="/" element={<RedeemDetail />} />
             <Route path="/tree" element={<Tree />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/profile" element={<Profile />} />
 
             <Route path="/redeem" element={<Redeem />} />
+            <Route path="/redeem/:slug" element={<RedeemDetail />} />
           </Routes>
         </ScrollView>
         <View style={styles.nav}>

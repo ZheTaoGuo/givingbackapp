@@ -128,7 +128,7 @@ export default function Tree() {
   return (
     <View style={{ position: "relative", backgroundColor: "#f5f6f7" }}>
       <View style={styles.pointContainer}>
-        <Text style={styles.pointText}>Points: 123</Text>
+        <Text style={styles.pointText}>Points: 321</Text>
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity

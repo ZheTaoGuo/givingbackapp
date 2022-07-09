@@ -36,6 +36,27 @@ const donations = [
     logo: "url",
     point: 200,
   },
+  {
+    title: "Unicef Donation Drive",
+    tag: ["Food", "Variable"],
+    image: "url",
+    logo: "url",
+    point: 3000,
+  },
+  {
+    title: "Inclusive Society Drive",
+    tag: ["Food"],
+    image: "url",
+    logo: "url",
+    point: 1500,
+  },
+  {
+    title: "“Pandamic” Donation Drive",
+    tag: ["Variable"],
+    image: "url",
+    logo: "url",
+    point: 200,
+  },
 ];
 
 export default function Redeem() {

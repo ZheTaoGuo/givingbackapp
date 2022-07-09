@@ -21,11 +21,15 @@ const donations = {
   description:
     "In post mean shot ye. There out her child sir his lived. Design at uneasy me season of branch on praise esteem. Abilities discourse believing consisted remaining to no. Mistaken no me denoting dashwood as screened. Whence or esteem easily he on. Dissuade husbands at of no if disposal.",
   point: 200,
+  participantes: 12345977,
+  charity: "Unicef",
+  donation: "Rice, Water",
 };
 
 export default function RedeemDetail() {
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
+  const [donated, setDonated] = useState(false);
 
   const btnHandle = () => {
     console.log("btn pressed");
@@ -85,9 +89,79 @@ export default function RedeemDetail() {
               </Text>
               <progress
                 style={{ width: "100%" }}
-                value="32"
+                value={
+                  donations.point < 321
+                    ? "100"
+                    : ((321 / donations.point) * 100).toFixed(2).toString()
+                }
                 max="100"
               ></progress>
+
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Participates:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {donations.participantes.toLocaleString()}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Donation:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {donations.donation}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Organization:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {donations.charity}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -109,18 +183,18 @@ export default function RedeemDetail() {
         }}
       >
         {donations.point < 321 ? (
-          <TouchableOpacity
-            style={styles.donateBtn}
-            onPress={() => setModalVisible(true)}
+          <Pressable
+            style={donated ? styles.donateBtnDisabled : styles.donateBtn}
+            onPress={() => {setModalVisible(true); setDonated(true);}}
+            disabled={donated}
           >
             <Text style={{ color: "white", fontSize: "1.25rem" }}>
-              Donate Now
+              {donated ? "Redeemed" : "Redeem Now"}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           <View
             style={styles.donateBtnDisabled}
-            onPress={() => setModalVisible(true)}
           >
             <Text style={{ color: "white", fontSize: "1.25rem" }}>
               {donations.point - 321} more points
@@ -134,18 +208,16 @@ export default function RedeemDetail() {
         animationType="fade"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>You have successfully redeemed</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </Pressable>
           </View>
         </View>
@@ -255,8 +327,10 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 16,
     elevation: 2,
+    paddingBottom: 8,
+    paddingTop: 8,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -266,11 +340,12 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontWeight: "bold",
     textAlign: "center",
+    fontSize: 18,
   },
   modalText: {
     marginBottom: 15,
+    fontSize: 24,
     textAlign: "center",
   },
 });

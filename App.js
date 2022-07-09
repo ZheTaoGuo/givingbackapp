@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { StyleSheet, Text, View, AppRegistry, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, AppRegistry, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -18,6 +18,8 @@ import Activity from "./pages/Activity";
 import RedeemDetail from "./pages/RedeemDetail"
 
 export default function App() {
+  const [navIndex, setNavIndex] = useState(0);
+
   return (
     <NativeRouter>
       <View style={styles.container}>
@@ -38,29 +40,29 @@ export default function App() {
           </Routes>
         </ScrollView>
         <View style={styles.nav}>
-          <Link to="/" underlayColor="#f0f4f7" style={styles.navItem}>
-            <Fragment>
-              <FontAwesomeIcon icon={faHandshakeAngle} />
-              <Text>Volunteer</Text>
-            </Fragment>
+          <Link to="/" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(0) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faHandshakeAngle} color={navIndex === 0 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 0 ? styles.navItemSelectedText : styles.navItemText}>Volunteer</Text>
+            </View>
           </Link>
-          <Link to="/tree" underlayColor="#f0f4f7" style={"123" == "tree" ? styles.navItemActive : styles.navItem}>
-            <Fragment>
-              <FontAwesomeIcon icon={faTree} />
-              <Text>Tree</Text>
-            </Fragment>
+          <Link to="/tree" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(1) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faTree} color={navIndex === 1 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 1 ? styles.navItemSelectedText : styles.navItemText}>Tree</Text>
+            </View>
           </Link>
-          <Link to="/funds" underlayColor="#f0f4f7" style={styles.navItem}>
-            <Fragment>
-              <FontAwesomeIcon  icon={faSackDollar} />
-              <Text>Funds</Text>
-            </Fragment>
+          <Link to="/funds" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(2) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faSackDollar} color={navIndex === 2 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 2 ? styles.navItemSelectedText : styles.navItemText}>Funds</Text>
+            </View>
           </Link>
-          <Link to="/profile" underlayColor="#f0f4f7" style={styles.navItem}>
-            <Fragment>
-              <FontAwesomeIcon icon={faUser} />
-              <Text>Profile</Text>
-            </Fragment>
+          <Link to="/profile" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(3) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faUser} color={navIndex === 3 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 3 ? styles.navItemSelectedText : styles.navItemText}>Profile</Text>
+            </View>
           </Link>
         </View>
       </View>
@@ -74,14 +76,14 @@ const styles = StyleSheet.create({
     height: "100vh"
   },
   contentWrapper: {
-    marginBottom: 75
+    marginBottom: 66
   },
   nav: {
     flexDirection: "row",
     justifyContent: "space-around",
     borderTopWidth: 1,
-    borderTopColor: "#AAA7A7",
-    padding: 5,
+    borderTopColor: "rgba(170, 167, 167, 0.5)",
+    padding: 7,
     position: "fixed",
     bottom: 0,
     width: "100%",
@@ -92,7 +94,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-  navIcon: {
+  navItemSelectedText: {
+    color: "#2fac97"
+  },
+  navItemText: {
+    color: "rgba(0, 0, 0, 0.3)"
+  },
+  subNavItem: {
+    display: "flex",
+    alignItems: "center",
+  },
+  navIcon:{
     height: 20,
     width: 20,
     marginBottom: 5,

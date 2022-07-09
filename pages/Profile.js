@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, Text, View, Image, Button, TouchableWithoutFeedback } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faStar, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import React, {useState, useMemo} from 'react';
 
 import { Badge } from "../components/Badge";
 import { Calendar } from 'react-native-calendars';
@@ -103,11 +104,12 @@ export default function Profile() {
       <View style={styles.profileHeader}>
         <View style={styles.profileImage}>
           <Image 
+            style={styles.imageStyle}
             source={require("../assets/profile.png")}
           />
         </View>
         <View>
-          <Text style={styles.profileName}>Amirah <Badge value="Novice" status="success" /></Text>
+          <Text style={styles.profileName}>Amirah <Badge value="Novice" status="success" badgeStyle={ styles.cardContentBadge } /></Text>
           <View style={styles.profilePoints}>
             <Text style={styles.profileText}>321&nbsp;</Text>
             <FontAwesomeIcon icon={faStar} size={32} color="#2fac97" />
@@ -145,10 +147,49 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff', 
+    flexGrow: 1,
+  },
+  containerContent: {
+    flexGrow: 1,
+  },
+  profileHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: 30, 
+    marginLeft: 10, 
+    marginRight: 10, 
+    paddingTop: 10, 
+    paddingBottom: 10, 
+    borderColor: 'rgba(0, 0, 0, 0.1)', 
+    borderStyle: 'solid', 
+    borderWidth: 1, 
+    borderRadius: "10px", 
+    backgroundColor: '#fff', 
+  }, 
+  profileImage: {
     alignItems: 'center',
     justifyContent: 'center',
+  }, 
+  profileName: {
+    fontSize: 25, 
+    fontWeight: 'bold',
+    color: "#2fac97", 
+    marginBottom: 10
+  }, 
+  profilePoints: {
+    flexDirection: 'row', 
+    marginBottom: 10, 
+  }, 
+  profileText: {
+    fontSize: 30
+  }, 
+  profileSmall: {
+    fontSize: 15
+  }, 
+  profileSub: {
+    opacity: 0.7
   },
   calendarStyle: {
     marginLeft: 10, 
@@ -238,5 +279,9 @@ const styles = StyleSheet.create({
   logOutButtonText: {
     color: "white",
     fontSize: 22, 
+  }, 
+  imageStyle: {
+    width: "5rem", 
+    height: "5rem"
   }
 });

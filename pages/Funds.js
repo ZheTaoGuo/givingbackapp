@@ -67,12 +67,6 @@ const donations = [
 ];
 
 export default function Funds() {
-  const navigate = useNavigate();
-
-  const navigateDetail = () => {
-    navigate("/funds/detail");
-  };
-
   return (
     <View style={{ backgroundColor: "#00997F" }}>
       <SafeAreaView>
@@ -150,27 +144,7 @@ export default function Funds() {
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    textAlign: "center",
-    paddingTop: 16,
-    padding: 10,
-    paddingBottom: 16,
-    position: "relative",
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "#AAA7A7",
-  },
-  headerText: {
-    textAlign: "center",
-    fontSize: "1.5rem",
-    fontWeight: 600,
-  },
-  backBtn: {
-    position: "absolute",
-    top: "35%",
-    zIndex: 1,
-  },
-  redeemContainer: {
+  container: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",

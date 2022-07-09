@@ -10,52 +10,87 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-native";
 
 const donations = [
   {
-    title: "Buy my Matches - help a child",
-    tag: ["Children"],
+    title: "Unicef Donation Drive",
+    tag: ["Food", "Variable"],
     image: "url",
-    amount: 80000,
-    donors: 502,
-    dayLeft: 141,
-    raised: 53695,
+    logo: "url",
+    point: 3000,
   },
   {
-    title: "Please Help our elderly",
-    tag: ["Elderly"],
+    title: "Inclusive Society Drive",
+    tag: ["Food"],
     image: "url",
-    image: "url",
-    amount: 80000,
-    donors: 502,
-    dayLeft: 141,
-    raised: 53695,
+    logo: "url",
+    point: 1500,
   },
   {
-    title: "Let us contribute to help",
-    tag: ["General"],
+    title: "“Pandamic” Donation Drive",
+    tag: ["Variable"],
     image: "url",
+    logo: "url",
+    point: 200,
+  },
+  {
+    title: "Unicef Donation Drive",
+    tag: ["Food", "Variable"],
     image: "url",
-    amount: 80000,
-    donors: 502,
-    dayLeft: 141,
-    raised: 53695,
+    logo: "url",
+    point: 3000,
+  },
+  {
+    title: "Inclusive Society Drive",
+    tag: ["Food"],
+    image: "url",
+    logo: "url",
+    point: 1500,
+  },
+  {
+    title: "“Pandamic” Donation Drive",
+    tag: ["Variable"],
+    image: "url",
+    logo: "url",
+    point: 200,
   },
 ];
 
-export default function Funds() {
+export default function Redeem() {
   const navigate = useNavigate();
 
+  const btnHandle = () => {
+    console.log("btn pressed");
+  };
+
+  const navigateBack = () => {
+    navigate(-1);
+  };
+
   const navigateDetail = () => {
-    navigate("/funds/detail");
+    navigate("/redeem/detail");
   };
 
   return (
     <View style={{ backgroundColor: "#00997F" }}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.backBtn} onPress={navigateBack}>
+          <FontAwesomeIcon icon={faAngleLeft} size={24} />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Redeem</Text>
+      </View>
       <SafeAreaView>
         <View style={styles.redeemContainer}>
           {donations.map((d, key) => {
+            let title = "";
+            if (d.point < 321) {
+              title = "Redeem Now";
+            } else {
+              title = `${d.point - 321} more points`;
+            }
             return (
               <TouchableOpacity
                 style={styles.item}
@@ -66,7 +101,7 @@ export default function Funds() {
                   <Text style={styles.itemTitle}>{d.title}</Text>
                   <Image
                     style={styles.itemProfile}
-                    source={require("../assets/donate_2.jpg")}
+                    source={require("../assets/donate_1.jpg")}
                   />
                   <View
                     style={{
@@ -93,40 +128,21 @@ export default function Funds() {
                       );
                     })}
                   </View>
-
-                  <Text style={styles.itemPoint}>
-                    {`$${d.raised.toLocaleString()} / $${d.amount.toLocaleString()}`}
-                  </Text>
+                  <Text style={styles.itemPoint}>321 / {d.point} points</Text>
                   <progress
                     style={{ width: "100%" }}
                     value={
-                      d.amount < d.raised
+                      d.point < 321
                         ? "100"
-                        : ((d.raised / d.amount) * 100).toFixed(2).toString()
+                        : ((321 / d.point) * 100).toFixed(2).toString()
                     }
                     max="100"
                   ></progress>
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      justifyContent: "space-between",
-                    }}
+                  <Text
+                    style={d.point < 321 ? styles.donateBtn : styles.donateBtnDisabled}
                   >
-                    <Text
-                      style={{
-                        fontWeight: 500,
-                        color: "#00997F",
-                      }}
-                    >
-                      {`${d.donors} donors`}
-                    </Text>
-                    <Text>
-                      {`${d.dayLeft} more days`}
-                    </Text>
-                  </View>
-                  <Text style={styles.donateBtn}> Donate Now </Text>
+                    {title}
+                  </Text>
                 </View>
               </TouchableOpacity>
             );

@@ -18,7 +18,7 @@ export default function Profile() {
         setEvent({
           title: "Helping the Elderly", 
           description: "A fun and rewarding event to help the elderly enjoy their day trip to the Singapore Botanic Gardens. ", 
-          tags: ["elderly", "garden", "outing"],
+          tags: ["Elderly", "Garden", "Outing"],
           startTime: "10:30 AM", 
           endTime: "5:00 PM",
           ...date
@@ -28,7 +28,7 @@ export default function Profile() {
         setEvent({
           title: "Junior Buddies", 
           description: "A fun event where you get to help those suffering from learning difficulties learn science in a practical and experimental manner. ", 
-          tags: ["learning", "difficulties", "science"],
+          tags: ["Learning", "Difficulties", "Science"],
           startTime: "11:30 AM", 
           endTime: "3:00 PM",
           ...date
@@ -38,7 +38,7 @@ export default function Profile() {
         setEvent({
           title: "Food for the heart", 
           description: "A rewarding event where you ould get to cook food and disrtibute them to those in need. ", 
-          tags: ["cooking", "food"],
+          tags: ["Cooking", "Food"],
           startTime: "10:30 AM", 
           endTime: "4:00 PM",
           ...date

@@ -2,22 +2,22 @@ import React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 import { useNavigate } from "react-router-native";
-import Icon from 'react-native-vector-icons/Ionicons';
+
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 
 const Users = [
-  { id: "1", uri: require('./assets/childrenlecture.png') },
-  { id: "2", uri: require('./assets/elderlyactivity.png') },
-  { id: "3", uri: require('./assets/accompanyingelderly.png') },
+  { id: "1", uri: require('../assets/childrenlecture.png') },
+  { id: "2", uri: require('../assets/elderlyactivity.png') },
+  { id: "3", uri: require('../assets/accompanyingelderly.png') },
   // { id: "4", uri: require('./assets/4.jpg') },
   // { id: "5", uri: require('./assets/5.jpg') },
 ]
-const navigate = useNavigate();
 
-export default class App extends React.Component {
+export default class Volunteer extends React.Component {
 
   constructor() {
+    const navigate = useNavigate();
     super()
     this.position = new Animated.ValueXY()
     this.state = {

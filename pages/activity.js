@@ -14,14 +14,13 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-native";
 
 const activities = {
-  title: "Unicef Donation Drive",
-  tag: ["Food", "Variable"],
+  title: "Help Children",
+  tag: ["Children"],
   image: "url",
-  description:
-    "In post mean shot ye. There out her child sir his lived. Design at uneasy me season of branch on praise esteem. Abilities discourse believing consisted remaining to no. Mistaken no me denoting dashwood as screened. Whence or esteem easily he on. Dissuade husbands at of no if disposal.",
+  description: "In post mean shot ye. There out her child sir his lived. Design at uneasy me season of branch on praise esteem. Abilities discourse believing consisted remaining to no. Mistaken no me denoting dashwood as screened. Whence or esteem easily he on. Dissuade husbands at of no if disposal.",
   activitystate: true,
   Date: "12/03/22",
-  Time: 12 + "pm",
+  Time: "12pm",
   Venue: "Unicef Donation Centre",
 };
 
@@ -83,72 +82,72 @@ export default function Activity() {
                 })}
               </View>
               <Text> {activities.description}</Text>
-            </View>
-            
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  color: "#00997F",
-                }}
-              >
-                Date:
-              </Text>
-              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
-                {activities.Date}
-              </Text>
-            </View>
 
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
-              <Text
+              <View
                 style={{
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  color: "#00997F",
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
                 }}
               >
-                Time:
-              </Text>
-              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
-                {activities.Time}
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Date:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {activities.Date}
+                </Text>
+              </View>
 
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
-              <Text
+              <View
                 style={{
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  color: "#00997F",
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
                 }}
               >
-                Venue:
-              </Text>
-              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
-                {activities.Venue}
-              </Text>
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Time:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {activities.Time}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: "#00997F",
+                  }}
+                >
+                  Venue:
+                </Text>
+                <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  {activities.Venue}
+                </Text>
+              </View>
             </View>
           </View>
         </View>

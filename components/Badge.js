@@ -10,7 +10,7 @@ export function Badge({value, status, badgeStyle}) {
 
     return (
         <View style={[badgeStyle, colorStyle]}>
-            <Text>{ value }</Text>
+            <Text style={{padding: "4px", borderRadius: "5px"}}>{ value }</Text>
         </View>
     )
 }

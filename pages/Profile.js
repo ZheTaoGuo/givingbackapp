@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ScrollView, Text, View, Image } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Image, Button, TouchableWithoutFeedback } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faStar  } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-import { Badge, Button, Card } from "@rneui/themed";
+import { Badge } from "../components/Badge";
 import { Calendar } from 'react-native-calendars';
 
 export default function Profile() {
@@ -75,9 +75,8 @@ export default function Profile() {
 
   const renderEventDetails = () => {
     return (
-      <Card>
-        <Card.Title>{ event.dateString }</Card.Title>
-        <Card.Divider />
+      <View style={styles.card}>
+        <View style={styles.cardTitleWrapper}><Text style={styles.cardTitle}>{ event.dateString }</Text></View>
         <View style={styles.cardContent}>
           <View style={styles.cardContentTime}>
             <Text>{ event.startTime }</Text>
@@ -90,13 +89,13 @@ export default function Profile() {
             <View style={styles.cardContentTags}>
               { event.tags.map((tag, idx) => {
                 return (
-                  <Badge key={idx} value={ tag } status="warning" badgeStyle={ styles.cardContentBadge } />
+                  <Badge key={idx} value={ tag } status="red" badgeStyle={ styles.cardContentBadge } />
                 )
               }) }
             </View>
           </View>
         </View>
-      </Card>
+      </View>
     )
   }
 
@@ -121,28 +120,24 @@ export default function Profile() {
       <View style={styles.calendarStyle}><Calendar markedDates={marked} onDayPress={(date) => displayEvent(date)} /></View>
       { event ? renderEventDetails() : <></> }
       <View style={styles.logOut}>
-        <Button title="Log Out"
-          icon={{
-            name: 'arrow-right',
-            type: 'font-awesome',
-            size: 15,
-            color: 'white',
-          }}
-          iconRight
-          iconContainerStyle={{ marginLeft: 10 }}
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{
-            backgroundColor: 'rgba(199, 43, 98, 1)',
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 30,
-          }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }} 
-        />
+        <TouchableWithoutFeedback>
+          <View 
+            icon={{
+              name: 'arrow-right-from-bracket',
+              type: 'font-awesome',
+              size: 15,
+              color: 'white',
+            }}
+            iconRight
+            iconContainerStyle={{ marginLeft: 10 }}
+            titleStyle={{ fontWeight: '700' }}
+            style={styles.logOutButton}
+            containerStyle={{
+              width: 200,
+              marginHorizontal: 50,
+              marginVertical: 10,
+            }}><Text style={styles.logOutButtonText}>Log Out&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowRightFromBracket} size={22} color="#fff" /></Text></View>
+        </TouchableWithoutFeedback>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -209,6 +204,30 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifySelf: "bottom"
   }, 
+  card: {
+    borderColor: 'rgba(0, 0, 0, 0.1)', 
+    borderStyle: 'solid', 
+    borderWidth: 1, 
+    borderRadius: "10px", 
+    marginLeft: 10, 
+    marginRight: 10, 
+    paddingTop: 10, 
+    paddingBottom: 10, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  cardTitle: {
+    fontSize: 18,
+    marginBottom: 3
+  },
+  cardTitleWrapper: {
+    borderBottomColor: 'rgba(0, 0, 0, 0.2)', 
+    borderBottomWidth: 1,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    width: "90%", 
+    marginBottom: 5,
+  },
   cardContent: {
     justifyContent: 'space-between', 
     alignItems: 'center', 
@@ -217,7 +236,7 @@ const styles = StyleSheet.create({
   cardContentTime: {
     justifyContent: 'center', 
     alignItems: 'center', 
-    margin: 2
+    margin: 5
   }, 
   cardContentDetails: {
     justifyContent: 'center', 
@@ -242,5 +261,22 @@ const styles = StyleSheet.create({
   }, 
   cardContentBadge: {
     marginRight: 4
+  }, 
+  logOutButton: {
+    backgroundColor: 'rgba(199, 43, 98, 1)',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30,
+    width: 200,
+    marginHorizontal: 50,
+    marginVertical: 10,
+    paddingHorizontal: 30, 
+    paddingVertical: 20, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+  }, 
+  logOutButtonText: {
+    color: "white",
+    fontSize: 22, 
   }
 });

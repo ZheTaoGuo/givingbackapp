@@ -7,6 +7,9 @@ export default function Eventpage() {
             <Text style={styles.header}>
                 Event Name 
             </Text>
+            <Text style={styles.container}>
+                
+            </Text>
         </View>
     )
 }

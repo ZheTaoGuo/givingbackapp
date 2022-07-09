@@ -14,6 +14,7 @@ import Funds from "./pages/Funds";
 import Volunteer from "./pages/Volunteer";
 import Profile from "./pages/Profile";
 import Redeem from "./pages/Redeem";
+import Activity from "./pages/Activity";
 
 export default function App() {
   return (
@@ -25,10 +26,11 @@ export default function App() {
           showsHorizontalScrollIndicator={false}
         >
           <Routes>
-            <Route path="/volunteer" element={<Volunteer />} />
+            <Route path="/" element={<Volunteer />} />
             <Route path="/tree" element={<Tree />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/activity" element={<Activity />} />
 
             <Route path="/redeem" element={<Redeem />} />
           </Routes>
@@ -36,25 +38,25 @@ export default function App() {
         <View style={styles.nav}>
           <Link to="/" underlayColor="#f0f4f7" style={styles.navItem}>
             <Fragment>
-              <FontAwesomeIcon style={styles.navIcon} icon={faHandshakeAngle} />
+              <FontAwesomeIcon icon={faHandshakeAngle} />
               <Text>Volunteer</Text>
             </Fragment>
           </Link>
           <Link to="/tree" underlayColor="#f0f4f7" style={"123" == "tree" ? styles.navItemActive : styles.navItem}>
             <Fragment>
-              <FontAwesomeIcon style={styles.navIcon} icon={faTree} />
+              <FontAwesomeIcon icon={faTree} />
               <Text>Tree</Text>
             </Fragment>
           </Link>
           <Link to="/funds" underlayColor="#f0f4f7" style={styles.navItem}>
             <Fragment>
-              <FontAwesomeIcon style={styles.navIcon} icon={faSackDollar} />
+              <FontAwesomeIcon  icon={faSackDollar} />
               <Text>Funds</Text>
             </Fragment>
           </Link>
           <Link to="/profile" underlayColor="#f0f4f7" style={styles.navItem}>
             <Fragment>
-              <FontAwesomeIcon style={styles.navIcon} icon={faUser} />
+              <FontAwesomeIcon icon={faUser} />
               <Text>Profile</Text>
             </Fragment>
           </Link>

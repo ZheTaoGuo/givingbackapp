@@ -13,12 +13,15 @@ const Users = [
   // { id: "4", uri: require('./assets/4.jpg') },
   // { id: "5", uri: require('./assets/5.jpg') },
 ]
+export default function Volunteer() {
+  const navigate = useNavigate();
+  return <VolunteerDetail navigation={navigate} /> ;
+}
+class VolunteerDetail extends React.Component {
 
-export default class Volunteer extends React.Component {
-
-  constructor() {
-    const navigate = useNavigate();
-    super()
+  constructor(props) {
+    super(props)
+    console.log(props)
     this.position = new Animated.ValueXY()
     this.state = {
       currentIndex: 0
@@ -75,12 +78,12 @@ export default class Volunteer extends React.Component {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
           }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 })
-            })
+            this.props.navigation("/activity");
+            // this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
+            //   this.position.setValue({ x: 0, y: 0 })
+            // })
           })
 
-          navigate("/activitydetail");
 
         }
         else if (gestureState.dx < -120) {
@@ -181,6 +184,7 @@ export default class Volunteer extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

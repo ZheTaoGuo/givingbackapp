@@ -14,7 +14,7 @@ import Funds from "./pages/Funds";
 import Volunteer from "./pages/Volunteer";
 import Profile from "./pages/Profile";
 import Redeem from "./pages/Redeem";
-import Activity from "./pages/Activity";
+import Activity from "./pages/activity";
 import RedeemDetail from "./pages/RedeemDetail"
 import FundsDetail from "./pages/FundsDetail";
 

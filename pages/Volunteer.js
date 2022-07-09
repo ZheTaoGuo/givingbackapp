@@ -7,9 +7,9 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 
 const Users = [
-  { id: "1", uri: require('./assets/image1.png') },
-  { id: "2", uri: require('./assets/image2.png') },
-  { id: "3", uri: require('./assets/image3.png') },
+  { id: "1", uri: require('./assets/childrenlecture.png') },
+  { id: "2", uri: require('./assets/elderlyactivity.png') },
+  { id: "3", uri: require('./assets/accompanyingelderly.png') },
   // { id: "4", uri: require('./assets/4.jpg') },
   // { id: "5", uri: require('./assets/5.jpg') },
 ]
@@ -190,5 +190,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  
+
 });

@@ -112,7 +112,7 @@ export default function RedeemDetail() {
                     color: "#00997F",
                   }}
                 >
-                  Participates:
+                  Participants:
                 </Text>
                 <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
                   {donations.participantes.toLocaleString()}
@@ -192,6 +192,7 @@ export default function RedeemDetail() {
               {donated ? "Redeemed" : "Redeem Now"}
             </Text>
           </Pressable>
+
         ) : (
           <View
             style={styles.donateBtnDisabled}

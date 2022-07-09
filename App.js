@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import { useWindowDimensions } from 'react-native';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import { useNavigate } from "react-router-native";
+
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 
+//array of objects
 const Users = [
   { id: "1", uri: require('./assets/image1.png') },
   { id: "2", uri: require('./assets/image2.png') },
@@ -11,6 +14,8 @@ const Users = [
   // { id: "4", uri: require('./assets/4.jpg') },
   // { id: "5", uri: require('./assets/5.jpg') },
 ]
+
+// const navigate = useNavigate();
 
 export default class App extends React.Component {
 
@@ -59,6 +64,7 @@ export default class App extends React.Component {
     })
 
   }
+
   componentWillMount() {
     this.PanResponder = PanResponder.create({
 
@@ -68,16 +74,19 @@ export default class App extends React.Component {
         this.position.setValue({ x: gestureState.dx, y: gestureState.dy })
       },
       onPanResponderRelease: (evt, gestureState) => {
-
+        //swipe right
         if (gestureState.dx > 120) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
           }).start(() => {
             this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 })
+              this.position.setValue({ x: 0, y: 0 }) //reset
             })
           })
+          // navigate('./components/Eventpage.js');
+
         }
+        //swipe left
         else if (gestureState.dx < -120) {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy }
@@ -98,7 +107,7 @@ export default class App extends React.Component {
   }
 
   renderUsers = () => {
-
+    //item then index
     return Users.map((item, i) => {
 
 
@@ -108,6 +117,7 @@ export default class App extends React.Component {
       else if (i == this.state.currentIndex) {
 
         return (
+          //degree of rotation
           <Animated.View
             {...this.PanResponder.panHandlers}
             key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute' }]}>
@@ -154,9 +164,10 @@ export default class App extends React.Component {
           </Animated.View>
         )
       }
-    }).reverse()
+    }).reverse() //get first image at the top 
   }
 
+  //image processing
   render() {
     return (
       <View style={{ flex: 1 }}>

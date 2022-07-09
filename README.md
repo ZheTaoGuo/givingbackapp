@@ -2,9 +2,10 @@
 
 This project aims to make volunteering easier, widespread, and more beneficial to those in need.
 
-![image](https://user-images.githubusercontent.com/32857830/178119991-85714ef2-7930-4555-b1f4-ba4f14e5c4f6.png)
-![photo1657389612](https://user-images.githubusercontent.com/32857830/178119905-56dcfb9a-a0aa-43cf-aaa9-59ac74140f9c.jpeg)
-![msg505146512-125087](https://user-images.githubusercontent.com/32857830/178119913-2a3a6329-3763-467c-b4d1-34a72ce67aee.jpg)
+![image](https://user-images.githubusercontent.com/32857830/178120152-0fb4bc2c-2d4f-46b3-9aec-f4daae0a2b3a.png)
+![image](https://user-images.githubusercontent.com/32857830/178120159-a649ccfb-f17a-48cc-a2fe-a936767c9648.png)
+![image](https://user-images.githubusercontent.com/32857830/178120168-87b92372-785f-4920-9017-187583c919b6.png)
+![image](https://user-images.githubusercontent.com/32857830/178120175-8a3af304-386c-4b36-921f-583a39553b43.png)
 
 ## Prerequisites
 

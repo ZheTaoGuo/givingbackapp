@@ -10,8 +10,11 @@ const Users = [
   { id: "1", uri: require('../assets/childrenlecture.png') },
   { id: "2", uri: require('../assets/elderlyactivity.png') },
   { id: "3", uri: require('../assets/accompanyingelderly.png') },
-  // { id: "4", uri: require('./assets/4.jpg') },
-  // { id: "5", uri: require('./assets/5.jpg') },
+  { id: "4", uri: require('../assets/givingfood.png') },
+  { id: "5", uri: require('../assets/painting.jpg') }
+  // { id: "6", uri: require('./assets/5.jpg') },
+  // { id: "7", uri: require('./assets/5.jpg') },
+
 ]
 export default function Volunteer() {
   const navigate = useNavigate();
@@ -168,9 +171,6 @@ class VolunteerDetail extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ height: 60 }}>
-
-        </View>
         <View style={{ flex: 1 }}>
           {this.renderUsers()}
         </View>
@@ -178,9 +178,18 @@ class VolunteerDetail extends React.Component {
 
         </View>
 
-
+      <View>
+        <Text  style={{
+                  padding: "10",
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "#00997F",
+                }} > 
+                Elderly Care
+        </Text>
       </View>
 
+      </View>
     );
   }
 }
@@ -193,6 +202,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 
 });

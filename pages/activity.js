@@ -14,42 +14,45 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-native";
 
 const activities = {
-    title: "Unicef Donation Drive",
-    tag: ["Food", "Variable"],
-    image: "url",
-    description:
-      "In post mean shot ye. There out her child sir his lived. Design at uneasy me season of branch on praise esteem. Abilities discourse believing consisted remaining to no. Mistaken no me denoting dashwood as screened. Whence or esteem easily he on. Dissuade husbands at of no if disposal.",
-    activitystate: true,
-  };
-
+  title: "Unicef Donation Drive",
+  tag: ["Food", "Variable"],
+  image: "url",
+  description:
+    "In post mean shot ye. There out her child sir his lived. Design at uneasy me season of branch on praise esteem. Abilities discourse believing consisted remaining to no. Mistaken no me denoting dashwood as screened. Whence or esteem easily he on. Dissuade husbands at of no if disposal.",
+  activitystate: true,
+  Date: "12/03/22",
+  Time: 12 + "pm",
+  Venue: "Unicef Donation Centre",
+};
 
 export default function Activity() {
-    const navigate = useNavigate();
-    const [modalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigate();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
+  const btnHandle = () => {
+    console.log("btn pressed");
+  };
 
-    const btnHandle = () => {
-        console.log("btn pressed");
-      };
+  const navigateBack = () => {
+    navigate(-1);
+  };
 
-    const navigateBack = () => {
-        navigate(-1);
-      };
+  return (
+    <View style={{ height: "100vh" }}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.backBtn} onPress={navigateBack}>
+          <FontAwesomeIcon icon={faAngleLeft} size={24} />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Event Detail</Text>
+      </View>
 
-    return (
-        <View style={{ height: "100vh" }}>
-            <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backBtn} onPress={navigateBack}>
-                    <FontAwesomeIcon icon={faAngleLeft} size={24} />
-                </TouchableOpacity>
-                <Text style={styles.headerText}>Event Detail</Text>
-            </View>
-
-        <SafeAreaView>
+      <SafeAreaView>
         <Image
           style={styles.itemProfile}
-          source={require("../assets/accompanyingelderly.png")}/>
-        
+          source={require("../assets/accompanyingelderly.png")}
+        />
+
         <View style={styles.activityContainer}>
           <View style={styles.item}>
             <View style={styles.card}>
@@ -78,16 +81,80 @@ export default function Activity() {
                     </Text>
                   );
                 })}
-                
+              </View>
+              <Text> {activities.description}</Text>
             </View>
-            <Text> {activities.description}</Text>
+            
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: 8,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "#00997F",
+                }}
+              >
+                Date:
+              </Text>
+              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                {activities.Date}
+              </Text>
+            </View>
 
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: 8,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "#00997F",
+                }}
+              >
+                Time:
+              </Text>
+              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                {activities.Time}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: 8,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "#00997F",
+                }}
+              >
+                Venue:
+              </Text>
+              <Text style={{ fontSize: "1rem", fontWeight: 500 }}>
+                {activities.Venue}
+              </Text>
+            </View>
+          </View>
         </View>
-            </View>
-                </View>
-        </SafeAreaView>
+      </SafeAreaView>
 
-        <View
+      <View
         style={{
           display: "flex",
           justifyContent: "center",
@@ -101,15 +168,16 @@ export default function Activity() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        {donations.activitystate == true ? (
-          <TouchableOpacity
-            style={styles.donateBtn}
+        {activities.activitystate == true ? (
+          <Pressable
+            style={registered ? styles.donateBtnDisabled : styles.donateBtn}
             onPress={() => setModalVisible(true)}
+            disabled={registered}
           >
             <Text style={{ color: "white", fontSize: "1.25rem" }}>
-              Register
+              {registered ? "Registered" : "Register Now"}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           <View
             style={styles.donateBtnDisabled}
@@ -132,150 +200,143 @@ export default function Activity() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>You have successfully registered!</Text>
+            <Text style={styles.modalText}>
+              You have successfully registered!
+            </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                setRegistered(true);
+              }}
+              disabled={registered}
             >
               <Text style={styles.textStyle}>Closel</Text>
             </Pressable>
           </View>
         </View>
-
       </Modal>
-    
-
-
-
-
-
     </View>
-
-        
-
-
-    )
-};
+  );
+}
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        textAlign: "center",
-        paddingTop: 16,
-        padding: 10,
-        paddingBottom: 16,
-        position: "relative",
-        backgroundColor: "white",
-        borderBottomWidth: 1,
-        borderBottomColor: "#AAA7A7",
-      },
-      headerText: {
-        textAlign: "center",
-        fontSize: "1.5rem",
-        fontWeight: 600,
-      },
-      backBtn: {
-        position: "absolute",
-        top: "35%",
-        zIndex: 1,
-      },
-      redeemContainer: {
-        flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "flex-start",
-        marginTop: -25,
-      },
-      item: {
-        width: "100%",
-      },
-      donateBtn: {
-        backgroundColor: "#00997F",
-        width: "fit-content",
-        padding: 16,
-        borderRadius: 8,
-        color: "white",
-        paddingTop: 8,
-        paddingBottom: 8,
-      },
-      donateBtnDisabled: {
-        backgroundColor: "#00997f80",
-        width: "fit-content",
-        padding: 16,
-        borderRadius: 8,
-        color: "white",
-        paddingTop: 8,
-        paddingBottom: 8,
-      },
-      card: {
-        padding: "1rem",
-        borderRadius: 16,
-        backgroundColor: "white",
-        display: "flex",
-        gap: 8,
-        height: "100%",
-      },
-    
-      itemProfile: {
-        width: "100%",
-        height: 240,
-      },
-      itemTitle: {
-        fontSize: "1.5rem",
-        fontWeight: 500,
-      },
-      itemDesc: {
-        color: "grey",
-        fontSize: ".75rem",
-      },
-      itemPoint: {
-        fontWeight: 600,
-        fontSize: "1rem",
-      },
-      imagebtn: {
-        height: 64,
-        width: 64,
-      },
-      centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.6)",
-      },
-      modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-      },
-      button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-      },
-      buttonOpen: {
-        backgroundColor: "#F194FF",
-      },
-      buttonClose: {
-        backgroundColor: "#2196F3",
-      },
-      textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center",
-      },
-      modalText: {
-        marginBottom: 15,
-        textAlign: "center",
-      },
+  headerContainer: {
+    textAlign: "center",
+    paddingTop: 16,
+    padding: 10,
+    paddingBottom: 16,
+    position: "relative",
+    backgroundColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: "#AAA7A7",
+  },
+  headerText: {
+    textAlign: "center",
+    fontSize: "1.5rem",
+    fontWeight: 600,
+  },
+  backBtn: {
+    position: "absolute",
+    top: "35%",
+    zIndex: 1,
+  },
+  redeemContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    marginTop: -25,
+  },
+  item: {
+    width: "100%",
+  },
+  donateBtn: {
+    backgroundColor: "#00997F",
+    width: "fit-content",
+    padding: 16,
+    borderRadius: 8,
+    color: "white",
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  donateBtnDisabled: {
+    backgroundColor: "#00997f80",
+    width: "fit-content",
+    padding: 16,
+    borderRadius: 8,
+    color: "white",
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  card: {
+    padding: "1rem",
+    borderRadius: 16,
+    backgroundColor: "white",
+    display: "flex",
+    gap: 8,
+    height: "100%",
+  },
 
-      
-})
+  itemProfile: {
+    width: "100%",
+    height: 240,
+  },
+  itemTitle: {
+    fontSize: "1.5rem",
+    fontWeight: 500,
+  },
+  itemDesc: {
+    color: "grey",
+    fontSize: ".75rem",
+  },
+  itemPoint: {
+    fontWeight: 600,
+    fontSize: "1rem",
+  },
+  imagebtn: {
+    height: 64,
+    width: 64,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.6)",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+});

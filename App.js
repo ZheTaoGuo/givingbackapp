@@ -67,20 +67,10 @@ export default function App() {
             </View>
           </Link>
         </View>
-        <View style={{ flex: 1 }}>
-          {this.renderUsers()}
-        </View>
-        <View style={{ height: 60 }}>
-
-        </View>
-
-
       </View>
     </NativeRouter>
-
-    );
-  }
-
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

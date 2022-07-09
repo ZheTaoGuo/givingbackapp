@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import Redeem from "./pages/Redeem";
 import Activity from "./pages/Activity";
 import RedeemDetail from "./pages/RedeemDetail"
+import FundsDetail from "./pages/FundsDetail";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
 
             <Route path="/redeem" element={<Redeem />} />
             <Route path="/redeem/:slug" element={<RedeemDetail />} />
+            <Route path="/funds/:slug" element={<FundsDetail />} />
           </Routes>
         </ScrollView>
         <View style={styles.nav}>

@@ -4,10 +4,7 @@ import {
   Text,
   View,
   SafeAreaView,
-  FlatList,
-  StatusBar,
   Image,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { useNavigate } from "react-router-native";
@@ -26,6 +23,23 @@ const donations = [
     title: "Please Help our elderly",
     tag: ["Elderly"],
     image: "url",
+    amount: 10000,
+    donors: 122,
+    dayLeft: 275,
+    raised: 9495,
+  },
+  {
+    title: "Let us contribute to help",
+    tag: ["General"],
+    image: "url",
+    amount: 10000,
+    donors: 35,
+    dayLeft: 351,
+    raised: 2110,
+  },
+  {
+    title: "Buy my Matches - help a child",
+    tag: ["Children"],
     image: "url",
     amount: 80000,
     donors: 502,
@@ -33,14 +47,22 @@ const donations = [
     raised: 53695,
   },
   {
+    title: "Please Help our elderly",
+    tag: ["Elderly"],
+    image: "url",
+    amount: 10000,
+    donors: 122,
+    dayLeft: 275,
+    raised: 9495,
+  },
+  {
     title: "Let us contribute to help",
     tag: ["General"],
     image: "url",
-    image: "url",
-    amount: 80000,
-    donors: 502,
-    dayLeft: 141,
-    raised: 53695,
+    amount: 10000,
+    donors: 35,
+    dayLeft: 351,
+    raised: 2110,
   },
 ];
 
@@ -106,26 +128,16 @@ export default function Funds() {
                     }
                     max="100"
                   ></progress>
-                  <View
+
+                  <Text
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      justifyContent: "space-between",
+                      fontWeight: 500,
+                      color: "#00997F",
                     }}
                   >
-                    <Text
-                      style={{
-                        fontWeight: 500,
-                        color: "#00997F",
-                      }}
-                    >
-                      {`${d.donors} donors`}
-                    </Text>
-                    <Text>
-                      {`${d.dayLeft} more days`}
-                    </Text>
-                  </View>
+                    {`${d.donors} donors`}
+                  </Text>
+                  <Text>{`${d.dayLeft} more days`}</Text>
                   <Text style={styles.donateBtn}> Donate Now </Text>
                 </View>
               </TouchableOpacity>
@@ -192,7 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     boxShadow: "0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)",
     display: "flex",
-    gap: 3,
+    gap: 5,
   },
 
   itemProfile: {

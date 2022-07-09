@@ -2,7 +2,7 @@
 **Project Name:** Return \
 **App Name:** GivingBack \
 **Backend Repo:** https://github.com/Hoo-dkwozD/GivingBackApp-BackEnd \
-**Pitch Slides:** https://www.canva.com/design/DAFF8Xv5lkc/sGZ6lW7Z_yJy1rLgsTj5lA/view
+**Pitch Slides:** https://www.canva.com/design/DAFF8Xv5lkc/sGZ6lW7Z_yJy1rLgsTj5lA/view \
 \
 This project aims to make volunteering easier, widespread, and more beneficial to those in need. GivingBack will be developed with an innovative approach to these 2 separate approaches, an enhanced volunteer referral system, and a streamlined volunteer mechanism. We believe these areas can all be addressed within a single mobile app.
 

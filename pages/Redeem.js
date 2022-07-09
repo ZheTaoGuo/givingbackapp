@@ -10,81 +10,123 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-native";
 
 const donations = [
   {
-    event: "referral",
-    username: "Chen Yun",
-    datetime: "2022/07/09 12:00:00",
-    point: 50,
+    title: "Unicef Donation Drive",
+    tag: ["Food", "Variable"],
+    image: "url",
+    logo: "url",
+    point: 3000,
   },
   {
-    event: "participate",
-    username: "Chen Yun",
-    datetime: "2022/07/09 11:00:00",
-    point: 120,
+    title: "Inclusive Society Drive",
+    tag: ["Food"],
+    image: "url",
+    logo: "url",
+    point: 1500,
   },
   {
-    event: "daily",
-    username: "Chen Yun",
-    datetime: "2022/07/09 18:00:00",
-    point: 10,
+    title: "“Pandamic” Donation Drive",
+    tag: ["Variable"],
+    image: "url",
+    logo: "url",
+    point: 200,
   },
 ];
 
-const Item = ({ item }) => {
-  return (
-    <View style={styles.item}>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "16px",
-          alignItems: "center",
-        }}
-      >
-        <Image
-          style={styles.itemProfile}
-          source={require("../assets/tree.png")}
-        />
-        <View>
-          <Text style={styles.itemTitle}>{item.username}</Text>
-          <Text style={styles.itemDesc}>{item.datetime}</Text>
-        </View>
-      </View>
-      <Text style={styles.itemPoint}>{item.point} points</Text>
-    </View>
-  );
-};
-
 export default function Redeem() {
+  const navigate = useNavigate();
+
   const btnHandle = () => {
     console.log("btn pressed");
   };
 
-  const renderItem = ({ item }) => {
-    return <Item item={item} />;
+  const navigateBack = () => {
+    navigate(-1);
+  };
+
+  const navigateDetail = () => {
+    navigate("/redeem/detail");
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: "#00997F" }}>
       <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.backBtn} onPress={navigateBack}>
+          <FontAwesomeIcon icon={faAngleLeft} size={24} />
+        </TouchableOpacity>
         <Text style={styles.headerText}>Redeem</Text>
       </View>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.card}>
-          <FlatList
-            data={donations}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-          <Button
-            onPress={btnHandle}
-            title="View More"
-            accessibilityLabel="Learn more about this purple button"
-          />
+      <SafeAreaView>
+        <View style={styles.redeemContainer}>
+          {donations.map((d, key) => {
+            let title = "";
+            if (d.point < 321) {
+              title = "Redeem Now";
+            } else {
+              title = `${d.point - 321} more points`;
+            }
+            return (
+              <TouchableOpacity
+                style={styles.item}
+                key={key}
+                onPress={navigateDetail}
+              >
+                <View style={styles.card}>
+                  <Text style={styles.itemTitle}>{d.title}</Text>
+                  <Image
+                    style={styles.itemProfile}
+                    source={require("../assets/donate_1.jpg")}
+                  />
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 5,
+                    }}
+                  >
+                    {d.tag.map((t, key) => {
+                      return (
+                        <Text
+                          style={{
+                            display: "inline-block",
+                            width: "fit-content",
+                            color: "white",
+                            padding: 4,
+                            borderRadius: 4,
+                            backgroundColor: "#00997F",
+                          }}
+                          key={key}
+                        >
+                          {t}
+                        </Text>
+                      );
+                    })}
+                  </View>
+                  <Text style={styles.itemPoint}>321 / {d.point} points</Text>
+                  <progress
+                    style={{ width: "100%" }}
+                    value={
+                      d.point < 321
+                        ? "100"
+                        : ((321 / d.point) * 100).toFixed(2).toString()
+                    }
+                    max="100"
+                  ></progress>
+                  <Text
+                    style={d.point < 321 ? styles.donateBtn : styles.donateBtnDisabled}
+                  >
+                    {title}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
         </View>
-        <View style={styles.space}></View>
       </SafeAreaView>
     </View>
   );
@@ -93,90 +135,68 @@ export default function Redeem() {
 const styles = StyleSheet.create({
   headerContainer: {
     textAlign: "center",
-    marginTop: 25,
+    paddingTop: 16,
     padding: 10,
+    paddingBottom: 16,
+    position: "relative",
+    backgroundColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: "#AAA7A7",
   },
   headerText: {
     textAlign: "center",
     fontSize: "1.5rem",
     fontWeight: 600,
   },
-  btnContainer: {
-    display: "flex",
-    flexDirection: "column",
+  backBtn: {
     position: "absolute",
-    top: 30,
-    right: 10,
+    top: "35%",
     zIndex: 1,
   },
-  pointContainer: {
-    display: "flex",
-    flexDirection: "column",
-    position: "absolute",
-    top: 60,
-    left: "50%",
-    zIndex: 1,
-    transform: "translate(-50%, -50%)",
-    padding: 24,
-    paddingTop: 12,
-    paddingBottom: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    borderRadius: 8,
-  },
-  pointText: {
-    fontSize: "1.2rem",
-    fontWeight: 600,
-  },
-  container: {
+  redeemContainer: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-    marginTop: 16,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+  },
+  item: {
+    width: "50%",
+    padding: 8,
+  },
+  donateBtn: {
+    backgroundColor: "#00997F",
+    padding: 16,
+    borderRadius: 8,
+    color: "white",
+    paddingTop: 8,
+    paddingBottom: 8,
+    textAlign: "center",
+  },
+  donateBtnDisabled: {
+    backgroundColor: "#00997f80",
+    padding: 16,
+    borderRadius: 8,
+    color: "white",
+    paddingTop: 8,
+    paddingBottom: 8,
+    textAlign: "center",
   },
   card: {
-    padding: "1.5rem",
-    paddingTop: "1rem",
+    padding: "1rem",
     borderRadius: 8,
     backgroundColor: "white",
     boxShadow: "0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)",
-  },
-  space: {
-    margin: "1rem",
-  },
-  item: {
-    marginVertical: 8,
     display: "flex",
-    flexDirection: "row",
-    gap: "16px",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingBottom: "1rem",
-    borderBottomWidth: "1px",
-    borderColor: "#e5e7eb",
+    gap: 3,
   },
-  header: {
-    fontSize: 32,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 24,
-  },
-  tinyLogo: {
-    width: "100%",
-    height: 500,
-  },
+
   itemProfile: {
-    width: 48,
-    height: 48,
-    borderRadius: 99999,
+    width: "100%",
+    height: 120,
   },
   itemTitle: {
     fontSize: "1rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
     fontWeight: 500,
-    marginBottom: 5,
   },
   itemDesc: {
     color: "grey",
@@ -185,10 +205,6 @@ const styles = StyleSheet.create({
   itemPoint: {
     fontWeight: 600,
     fontSize: "1rem",
-  },
-  button: {
-    alignItems: "center",
-    margin: 5,
   },
   imagebtn: {
     height: 64,

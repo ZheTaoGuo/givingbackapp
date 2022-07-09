@@ -27,7 +27,7 @@ export default function App() {
           showsHorizontalScrollIndicator={false}
         >
           <Routes>
-            <Route exact path="/" element={<Tree />} />
+            <Route exact path="/" element={<Volunteer />} />
             <Route path="/tree" element={<Tree />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/profile" element={<Profile />} />

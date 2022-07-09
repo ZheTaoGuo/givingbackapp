@@ -1,178 +1,71 @@
-import React from 'react';
-import { useWindowDimensions } from 'react-native';
-import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
-// import { useNavigate } from "react-router-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, AppRegistry, ScrollView, TouchableWithoutFeedback } from "react-native";
+import { NativeRouter, Route, Link, Routes } from "react-router-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faUser,
+  faHandshakeAngle,
+  faTree,
+  faSackDollar,
+} from "@fortawesome/free-solid-svg-icons";
 
-const SCREEN_HEIGHT = Dimensions.get('window').height
-const SCREEN_WIDTH = Dimensions.get('window').width
+import Tree from "./pages/Tree";
+import Funds from "./pages/Funds";
+import Volunteer from "./pages/Volunteer";
+import Profile from "./pages/Profile";
+import Redeem from "./pages/Redeem";
+import Activity from "./pages/Activity";
+import RedeemDetail from "./pages/RedeemDetail"
+import FundsDetail from "./pages/FundsDetail";
 
-//array of objects
-const Users = [
-  { id: "1", uri: require('./assets/image1.png') },
-  { id: "2", uri: require('./assets/image2.png') },
-  { id: "3", uri: require('./assets/image3.png') },
-  // { id: "4", uri: require('./assets/4.jpg') },
-  // { id: "5", uri: require('./assets/5.jpg') },
-]
+export default function App() {
+  const [navIndex, setNavIndex] = useState(0);
 
-// const navigate = useNavigate();
+  return (
+    <NativeRouter>
+      <View style={styles.container}>
+        <ScrollView
+          style={styles.contentWrapper}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
+          <Routes>
+            <Route exact path="/" element={<Volunteer />} />
+            <Route path="/tree" element={<Tree />} />
+            <Route path="/funds" element={<Funds />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/activity" element={<Activity />} />
 
-export default class App extends React.Component {
-
-  constructor() {
-    super()
-
-    this.position = new Animated.ValueXY()
-    this.state = {
-      currentIndex: 0
-    }
-
-    this.rotate = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: ['-10deg', '0deg', '10deg'],
-      extrapolate: 'clamp'
-    })
-
-    this.rotateAndTranslate = {
-      transform: [{
-        rotate: this.rotate
-      },
-      ...this.position.getTranslateTransform()
-      ]
-    }
-
-    this.likeOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [0, 0, 1],
-      extrapolate: 'clamp'
-    })
-    this.dislikeOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0, 0],
-      extrapolate: 'clamp'
-    })
-
-    this.nextCardOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0, 1],
-      extrapolate: 'clamp'
-    })
-    this.nextCardScale = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0.8, 1],
-      extrapolate: 'clamp'
-    })
-
-  }
-
-  componentWillMount() {
-    this.PanResponder = PanResponder.create({
-
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onPanResponderMove: (evt, gestureState) => {
-
-        this.position.setValue({ x: gestureState.dx, y: gestureState.dy })
-      },
-      onPanResponderRelease: (evt, gestureState) => {
-        //swipe right
-        if (gestureState.dx > 120) {
-          Animated.spring(this.position, {
-            toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
-          }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 }) //reset
-            })
-          })
-          // navigate('./components/Eventpage.js');
-
-        }
-        //swipe left
-        else if (gestureState.dx < -120) {
-          Animated.spring(this.position, {
-            toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy }
-          }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 })
-            })
-          })
-        }
-        else {
-          Animated.spring(this.position, {
-            toValue: { x: 0, y: 0 },
-            friction: 4
-          }).start()
-        }
-      }
-    })
-  }
-
-  renderUsers = () => {
-    //item then index
-    return Users.map((item, i) => {
-
-
-      if (i < this.state.currentIndex) {
-        return null
-      }
-      else if (i == this.state.currentIndex) {
-
-        return (
-          //degree of rotation
-          <Animated.View
-            {...this.PanResponder.panHandlers}
-            key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute' }]}>
-            <Animated.View style={{ opacity: this.likeOpacity, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
-
-            </Animated.View>
-
-            <Animated.View style={{ opacity: this.dislikeOpacity, transform: [{ rotate: '30deg' }], position: 'absolute', top: 50, right: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'red', color: 'red', fontSize: 32, fontWeight: '800', padding: 10 }}>NOPE</Text>
-
-            </Animated.View>
-
-            <Image
-              style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
-              source={item.uri} />
-
-          </Animated.View>
-        )
-      }
-      else {
-        return (
-          <Animated.View
-
-            key={item.id} style={[{
-              opacity: this.nextCardOpacity,
-              transform: [{ scale: this.nextCardScale }],
-              height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute'
-            }]}>
-            <Animated.View style={{ opacity: 0, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
-
-            </Animated.View>
-
-            <Animated.View style={{ opacity: 0, transform: [{ rotate: '30deg' }], position: 'absolute', top: 50, right: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'red', color: 'red', fontSize: 32, fontWeight: '800', padding: 10 }}>NOPE</Text>
-
-            </Animated.View>
-
-            <Image
-              style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
-              source={item.uri} />
-
-          </Animated.View>
-        )
-      }
-    }).reverse() //get first image at the top 
-  }
-
-  //image processing
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={{ height: 60 }}>
-
+            <Route path="/redeem" element={<Redeem />} />
+            <Route path="/redeem/:slug" element={<RedeemDetail />} />
+            <Route path="/funds/:slug" element={<FundsDetail />} />
+          </Routes>
+        </ScrollView>
+        <View style={styles.nav}>
+          <Link to="/" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(0) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faHandshakeAngle} color={navIndex === 0 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 0 ? styles.navItemSelectedText : styles.navItemText}>Volunteer</Text>
+            </View>
+          </Link>
+          <Link to="/tree" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(1) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faTree} color={navIndex === 1 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 1 ? styles.navItemSelectedText : styles.navItemText}>Tree</Text>
+            </View>
+          </Link>
+          <Link to="/funds" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(2) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faSackDollar} color={navIndex === 2 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 2 ? styles.navItemSelectedText : styles.navItemText}>Funds</Text>
+            </View>
+          </Link>
+          <Link to="/profile" component={ TouchableWithoutFeedback } onPress={ () => setNavIndex(3) } underlayColor="#f0f4f7" style={styles.navItem}>
+            <View style={styles.subNavItem}>
+              <FontAwesomeIcon style={styles.navIcon} icon={faUser} color={navIndex === 3 ? "#2fac97" : "rgba(0, 0, 0, 0.3)"} />
+              <Text style={navIndex === 3 ? styles.navItemSelectedText : styles.navItemText}>Profile</Text>
+            </View>
+          </Link>
         </View>
         <View style={{ flex: 1 }}>
           {this.renderUsers()}
@@ -183,10 +76,11 @@ export default class App extends React.Component {
 
 
       </View>
+    </NativeRouter>
 
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -194,14 +88,14 @@ const styles = StyleSheet.create({
     height: "100vh"
   },
   contentWrapper: {
-    marginBottom: 75
+    marginBottom: 66
   },
   nav: {
     flexDirection: "row",
     justifyContent: "space-around",
     borderTopWidth: 1,
-    borderTopColor: "#AAA7A7",
-    padding: 5,
+    borderTopColor: "rgba(170, 167, 167, 0.5)",
+    padding: 7,
     position: "fixed",
     bottom: 0,
     width: "100%",
@@ -212,7 +106,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-  navIcon: {
+  navItemSelectedText: {
+    color: "#2fac97"
+  },
+  navItemText: {
+    color: "rgba(0, 0, 0, 0.3)"
+  },
+  subNavItem: {
+    display: "flex",
+    alignItems: "center",
+  },
+  navIcon:{
     height: 20,
     width: 20,
     marginBottom: 5,

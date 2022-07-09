@@ -42,19 +42,32 @@ const activities = [
   },
   {
     event: "participate",
-    username: "Chen Yun",
+    username: "Help Kid",
     datetime: "2022/07/09 11:00:00",
-    point: 120,
+    point: 261,
   },
   {
     event: "daily",
     username: "Chen Yun",
-    datetime: "2022/07/09 18:00:00",
+    datetime: "2022/07/09 08:00:00",
     point: 10,
   },
 ];
 
 const Item = ({ item }) => {
+  let title = "";
+  switch(item.event){
+    case "referral":
+      title = `Invited ${item.username}`
+      break;
+    case "participate":
+      title = `Participated in ${item.username}`
+      break;
+    case "daily":
+      title = "Daily Login"
+      break;
+  }
+
   return (
     <View style={styles.item}>
       <View
@@ -70,7 +83,7 @@ const Item = ({ item }) => {
           source={require("../assets/tree.png")}
         />
         <View>
-          <Text style={styles.itemTitle}>{item.username}</Text>
+          <Text style={styles.itemTitle}>{title}</Text>
           <Text style={styles.itemDesc}>{item.datetime}</Text>
         </View>
       </View>
@@ -128,7 +141,7 @@ export default function Tree() {
   return (
     <View style={{ position: "relative", backgroundColor: "#f5f6f7" }}>
       <View style={styles.pointContainer}>
-        <Text style={styles.pointText}>Points: 123</Text>
+        <Text style={styles.pointText}>Points: 321</Text>
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity

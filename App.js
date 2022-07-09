@@ -27,7 +27,7 @@ export default function App() {
           showsHorizontalScrollIndicator={false}
         >
           <Routes>
-            <Route exact path="/" element={<Volunteer />} />
+            <Route exact path="/" element={<Tree />} />
             <Route path="/tree" element={<Tree />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/profile" element={<Profile />} />
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     height: "100vh"
   },
   contentWrapper: {
-    marginBottom: 75
+    marginBottom: 66
   },
   nav: {
     flexDirection: "row",

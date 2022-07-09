@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
   Pressable,
   Modal,
+  TextInput,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-native";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const donations = {
   title: "Buy my Matches - help a child",
@@ -30,6 +32,7 @@ export default function FundsDetail() {
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
   const [donated, setDonated] = useState(false);
+  const [amount, onChangeNumber] = useState("");
 
   const navigateBack = () => {
     navigate(-1);
@@ -195,11 +198,39 @@ export default function FundsDetail() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <TextInput
+              style={styles.input}
+              onChangeText={(newText) => onChangeNumber(newText)}
+              value={amount}
+              placeholder="Donation Amount"
+              keyboardType="numeric"
+            />
+            <PayPalScriptProvider options={{ "client-id": "test" }}>
+              <PayPalButtons
+                createOrder={(data, actions, amount) => {
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: "0.11",
+                        },
+                      },
+                    ],
+                  });
+                }}
+                onApprove={(data, actions) => {
+                  return actions.order.capture().then((details) => {
+                    const name = details.payer.name.given_name;
+                    console.log(`Transaction completed by ${name}`);
+                  });
+                }}
+              />
+            </PayPalScriptProvider>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Close</Text>
+              <Text style={styles.textStyle}>X</Text>
             </Pressable>
           </View>
         </View>
@@ -318,10 +349,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    position: "absolute",
+    top: 0,
+    right: 0,
   },
   textStyle: {
-    color: "white",
     textAlign: "center",
     fontSize: 18,
   },
@@ -329,5 +361,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 24,
     textAlign: "center",
+  },
+  input: {
+    marginTop: 15,
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
+    width: "100%",
+    marginBottom: 16,
   },
 });

@@ -21,7 +21,6 @@ class VolunteerDetail extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log(props)
     this.position = new Animated.ValueXY()
     this.state = {
       currentIndex: 0
@@ -169,16 +168,12 @@ class VolunteerDetail extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={{ height: 60 }}>
-
         </View>
         <View style={{ flex: 1 }}>
           {this.renderUsers()}
         </View>
         <View style={{ height: 60 }}>
-
         </View>
-
-
       </View>
 
     );

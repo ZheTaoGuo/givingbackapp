@@ -2,7 +2,12 @@
 
 This project aims to make volunteering easier, widespread, and more beneficial to those in need.
 
+![msg505146512-125083](https://user-images.githubusercontent.com/32857830/178119897-4fa777d9-819e-4f36-9107-9b46e12d625f.jpg)
+![photo1657389612](https://user-images.githubusercontent.com/32857830/178119905-56dcfb9a-a0aa-43cf-aaa9-59ac74140f9c.jpeg)
+![msg505146512-125087](https://user-images.githubusercontent.com/32857830/178119913-2a3a6329-3763-467c-b4d1-34a72ce67aee.jpg)
+
 ## Prerequisites
+
 
 - [Node.js > 12](https://nodejs.org) and npm (Recommended: Use [nvm](https://github.com/nvm-sh/nvm))
 - [Watchman](https://facebook.github.io/watchman)

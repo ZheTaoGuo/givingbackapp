@@ -1,6 +1,6 @@
 # Return
-**Project Name:** Return
-**App Name:** GivingBack
+**Project Name:** Return \
+**App Name:** GivingBack \
 This project aims to make volunteering easier, widespread, and more beneficial to those in need. GivingBack will be developed with an innovative approach to these 2 separate approaches, an enhanced volunteer referral system, and a streamlined volunteer mechanism. We believe these areas can all be addressed within a single mobile app.
 
 ![image](https://user-images.githubusercontent.com/32857830/178120152-0fb4bc2c-2d4f-46b3-9aec-f4daae0a2b3a.png)

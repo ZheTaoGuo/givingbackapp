@@ -10,30 +10,8 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { useNavigate } from "react-router-native";
 
-const leaderBoard = [
-  {
-    profile: "url",
-    username: "Chen Yun",
-    certCount: 8,
-    point: 321,
-  },
-  {
-    profile: "url",
-    username: "Num Two",
-    certCount: 5,
-    point: 213,
-  },
-  {
-    profile: "url",
-    username: "Num Three",
-    certCount: 3,
-    point: 123,
-  },
-];
-
-const activities = [
+const donations = [
   {
     event: "referral",
     username: "Chen Yun",
@@ -79,36 +57,7 @@ const Item = ({ item }) => {
   );
 };
 
-const LeaderItem = ({ item }) => {
-  return (
-    <View style={styles.item}>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "16px",
-          alignItems: "center",
-        }}
-      >
-        <Image
-          style={styles.itemProfile}
-          source={require("../assets/tree.png")}
-        />
-        <View>
-          <Text style={styles.itemTitle}>{item.username}</Text>
-          <Text style={styles.itemDesc}>
-            Obtained {item.certCount} certificates
-          </Text>
-        </View>
-      </View>
-      <Text style={styles.itemPoint}>{item.point} points</Text>
-    </View>
-  );
-};
-
-export default function Tree() {
-  const navigate = useNavigate();
-
+export default function Redeem() {
   const btnHandle = () => {
     console.log("btn pressed");
   };
@@ -117,68 +66,16 @@ export default function Tree() {
     return <Item item={item} />;
   };
 
-  const renderLeaderItem = ({ item }) => {
-    return <LeaderItem item={item} />;
-  };
-
-  const navigateToContacts = () => {
-    navigate("/redeem");
-  };
-
   return (
-    <View style={{ position: "relative", backgroundColor: "#f5f6f7" }}>
-      <View style={styles.pointContainer}>
-        <Text style={styles.pointText}>Points: 123</Text>
+    <View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Redeem</Text>
       </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={navigateToContacts}
-        >
-          <Image
-            style={styles.imagebtn}
-            source={require("../assets/donationBtn_50.png")}
-          />
-        </TouchableOpacity>
-      </View>
-      <Image style={styles.tinyLogo} source={require("../assets/tree.png")} />
-
       <SafeAreaView style={styles.container}>
         <View style={styles.card}>
-          <Text
-            style={{
-              fontSize: "24px",
-              marginBottom: "8px",
-              fontWeight: "500",
-            }}
-          >
-            Activity
-          </Text>
           <FlatList
-            data={activities}
+            data={donations}
             renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-          <Button
-            onPress={btnHandle}
-            title="View More"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-        <Text
-          style={{
-            fontSize: "24px",
-            marginBottom: "8px",
-            marginTop: "16px",
-            fontWeight: "500",
-          }}
-        >
-          Leaderboard
-        </Text>
-        <View style={styles.card}>
-          <FlatList
-            data={leaderBoard}
-            renderItem={renderLeaderItem}
             keyExtractor={(item) => item.id}
           />
           <Button
@@ -194,6 +91,16 @@ export default function Tree() {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    textAlign: "center",
+    marginTop: 25,
+    padding: 10,
+  },
+  headerText: {
+    textAlign: "center",
+    fontSize: "1.5rem",
+    fontWeight: 600,
+  },
   btnContainer: {
     display: "flex",
     flexDirection: "column",

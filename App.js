@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 // import { useNavigate } from "react-router-native";
@@ -191,8 +191,34 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100vh"
+  },
+  contentWrapper: {
+    marginBottom: 75
+  },
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderTopWidth: 1,
+    borderTopColor: "#AAA7A7",
+    padding: 5,
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "white",
+  },
+  navItem: {
+    flex: 1,
+    alignItems: "center",
+    padding: 10,
+  },
+  navIcon: {
+    height: 20,
+    width: 20,
+    marginBottom: 5,
+  },
+  topic: {
+    textAlign: "center",
+    fontSize: 15,
   },
 });

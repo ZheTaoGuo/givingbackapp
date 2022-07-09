@@ -10,6 +10,8 @@ import {
   PanResponder,
 } from "react-native";
 import { useNavigate } from "react-router-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faShareNodes} from "@fortawesome/free-solid-svg-icons";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -251,6 +253,20 @@ class VolunteerDetail extends React.Component {
                 );
               })}
             </View>
+
+            <Text
+              style={{
+                position: "absolute",
+                bottom: 10,
+                padding: 15,
+                fontSize: "1.5rem",
+                textAlign: "right",
+                right: 20,
+                color: "white"
+              }}
+            >
+              <FontAwesomeIcon icon={faShareNodes} size={32} color={"#fff"}/>
+            </Text>
           </Animated.View>
         );
       } else {
@@ -326,6 +342,19 @@ class VolunteerDetail extends React.Component {
               }}
               source={item.uri}
             />
+            <Text
+              style={{
+                position: "absolute",
+                bottom: 10,
+                padding: 15,
+                fontSize: "1.5rem",
+                textAlign: "right",
+                right: 20,
+                color: "white"
+              }}
+            >
+              <FontAwesomeIcon icon={faShareNodes} size={32} color={"#fff"}/>
+            </Text>
             <Text
               style={{
                 position: "absolute",

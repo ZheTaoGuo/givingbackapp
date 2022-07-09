@@ -1,6 +1,6 @@
 # Return
 
-This project aims to make volunteering easier, widespread, and more beneficial to those in need.
+This project aims to make volunteering easier, widespread, and more beneficial to those in need. GivingBack will be developed with an innovative approach to these 2 separate approaches, an enhanced volunteer referral system, and a streamlined volunteer mechanism. We believe these areas can all be addressed within a single mobile app.
 
 ![image](https://user-images.githubusercontent.com/32857830/178120152-0fb4bc2c-2d4f-46b3-9aec-f4daae0a2b3a.png)
 ![image](https://user-images.githubusercontent.com/32857830/178120159-a649ccfb-f17a-48cc-a2fe-a936767c9648.png)
